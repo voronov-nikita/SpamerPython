@@ -8,12 +8,13 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QRect
 
 
+version = "1.0.0"
 
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Spamer")
+        self.setWindowTitle(f"Spamer {version}")
         x, y = pyautogui.size()
         self.setGeometry(QRect(x//2, y//2, 350, 280))
         self.setFixedSize(self.width(), self.height())
@@ -27,18 +28,18 @@ class Window(QMainWindow):
         self.line_message.setPlaceholderText("Message for spam")
 
         self.line_count = QLineEdit(self)
-        self.line_count.move(0, 100+1)
+        self.line_count.move(0, 100)
         self.line_count.resize(350, 50)
         self.line_count.setPlaceholderText("Number of spam messages")
 
         self.line_timer = QLineEdit(self)
-        self.line_timer.move(0, 150+1)
+        self.line_timer.move(0, 150)
         self.line_timer.resize(350, 50)
         self.line_timer.setPlaceholderText("Delay before spam")
 
         self.button = QPushButton(self)
-        self.button.move(0, 200+21)
-        self.button.resize(350, 50)
+        self.button.move(0, 175+20)
+        self.button.resize(350, 100)
         self.button.clicked.connect(self.start_send_message)
         self.button.setText("Start")
 
