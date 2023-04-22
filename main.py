@@ -3,7 +3,7 @@ import time
 import keyboard
 import sys
 
-from PyQt5.QtWidgets import QMainWindow, QLineEdit, QApplication, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QLineEdit, QApplication, QPushButton, QLabel
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QRect
 
@@ -22,6 +22,11 @@ class Window(QMainWindow):
         self.initUI()
 
     def initUI(self):
+        self.label = QLabel(self)
+        self.label.resize(350, 50)
+        self.label.move(50, 0)
+        self.label.setText("Введите необходимы значения")
+
         self.line_message = QLineEdit(self)
         self.line_message.move(0, 50)
         self.line_message.resize(350, 50)
