@@ -3,12 +3,19 @@ import time
 import keyboard
 import sys
 
-from PyQt5.QtWidgets import QMainWindow, QLineEdit, QApplication, QPushButton, QLabel
-from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow, QLineEdit, QApplication, QPushButton, QLabel, QAction, QShortcut
+from PyQt5.QtGui import QIcon, QKeySequence
 from PyQt5.QtCore import QRect
 
 
 version = "1.0.0"
+class ActionDo():
+    def reset(self):
+        print("Reset")
+
+    def settings(self):
+        print("Settings")
+
 
 class Window(QMainWindow):
     def __init__(self):
@@ -19,7 +26,9 @@ class Window(QMainWindow):
         self.setGeometry(QRect(x//2, y//2, 350, 280))
         self.setFixedSize(self.width(), self.height())
         self.setWindowIcon(QIcon("logo.png"))
+
         self.initUI()
+        self.initAction()
 
     def initUI(self):
         self.label = QLabel(self)
@@ -46,7 +55,7 @@ class Window(QMainWindow):
         self.button.move(0, 175+20)
         self.button.resize(350, 100)
         self.button.clicked.connect(self.start_send_message)
-        self.button.setText("Start")
+        self.button.setText("START SPAM")
 
     def start_send_message(self):
         message = self.line_message.text()
@@ -63,6 +72,17 @@ class Window(QMainWindow):
         self.line_count.clear()
         self.line_message.clear()
         self.line_timer.clear()
+
+    def initAction(self):
+        act = ActionDo()
+
+        action1 = QAction("Выполнить", self)
+        action1.setShortcut(QKeySequence("Ctrl+Shift+R"))
+        action1.triggered.connect(act.reset)
+
+        action2 = QAction("Выполнить", self)
+        action2.setShortcut(QKeySequence("Alt+I"))
+        action2.triggered.connect(act.settings)
 
 
 app = QApplication(sys.argv)
