@@ -58,16 +58,18 @@ class Window(QMainWindow):
         self.button.setText("START SPAM")
 
     def start_send_message(self):
-        message = self.line_message.text()
+        message = self.line_message.text().encode('utf-8')
         amount = int(self.line_count.text())
         time.sleep(int(self.line_timer.text()))
 
         while amount > 0:
             if keyboard.is_pressed("esc"):
                 break
+            elif keyboard.is_pressed("delete"):
+                print("delete")
             else:
                 amount -= 1
-                pyautogui.typewrite(message.strip())
+                pyautogui.typewrite(message.decode('utf-8').strip())
                 pyautogui.press("enter")
         self.line_count.clear()
         self.line_message.clear()
