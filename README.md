@@ -1,9 +1,27 @@
-# python_spamer
+# Spamer
+### Python application
+
+--------------------------
 
 ![image](https://linchakin.com/files/word/1000/327/1.jpg)
 
+## **Content**
+1. [About](/README.md#about)
+2. [Useful Links](/README.md#useful-links)
+3. [More Information](/README.md#more-information)
+
+
+## **About**
 Спамер написанный на Python для того, чтобы человек передумал игнорировать ваши сообщения. Работает по принципу набора текста в активное поле написания.
 
+
+## **Useful Links**
+1. python - [python.org](https://python.org)
+2. pypi - [pypi.org](https://pypi.org)
+3. PyQt5 - [pypi.org/project/PyQt5/](https://pypi.org/project/PyQt5/)
+
+
+## **More Information**
 При запуске программы, откроется новое окно с некоторой информацией от пользователя, а конкретно:
 1. О тексте сообщения, которое хотят отправить. _Не рекомендуется использование русского языка_
 2. О количестве сообщений суммарно. _Рекомендуется ставить не более 500_
@@ -11,4 +29,4 @@
 
 После нажатия на кнопку старт, по истечению времени задержки, начнется отправка сообщений. При этом курсор печати должен стоять и мигать, т.е текст должен набираться.
 
-###### 21.03.2023 - the last commit.
+###### 17.05.2023 - the last commit.
