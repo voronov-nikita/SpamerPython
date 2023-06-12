@@ -11,6 +11,41 @@ from PyQt5.QtCore import QRect
 
 # version = "1.0.1"
 
+
+class SuccessfulCompletion(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.window_name = "Сообщение"
+        self.window_size = (350, 150)
+        self.window_icon = "logo.ico"
+
+        self.InitInterface()
+        self.InitText()
+
+    def InitInterface(self):
+        x, y = pyautogui.size()
+        self.setWindowIcon(QIcon(self.window_icon))
+        self.setWindowTitle("Внимание")
+        self.setGeometry(QRect((x-self.window_size[0])//2, (y-self.window_size[1])//2, *self.window_size))
+        self.setFixedSize(self.width(), self.height())
+
+    
+    def InitText(self):
+        self.label = QLabel(self)
+        self.label.resize(self.width(), self.height())
+        self.label.setText("  \tУспешно Завершено!")
+        self.label.setStyleSheet("""
+            background: rgb(25, 25, 25);
+            color: rgb(203, 203, 65);
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+            font-weight: bold;
+            text-align: center;
+        """)
+
+
 class MesageEmptyPlace(QDialog):
     def __init__(self):
         super().__init__()
@@ -132,6 +167,10 @@ class Window(QMainWindow):
             self.line_count.clear()
             self.line_message.clear()
             self.line_timer.clear()
+
+            ex = SuccessfulCompletion()
+            ex.exec_()
+            
         except ValueError:
             self.line_count.clear()
             self.line_message.clear()
@@ -141,7 +180,8 @@ class Window(QMainWindow):
     
 
 
-app = QApplication(sys.argv)
-ex = Window()
-ex.show()
-sys.exit(app.exec_())
+if __name__=="__main__":
+    app = QApplication(sys.argv)
+    ex = Window()
+    ex.show()
+    sys.exit(app.exec_())
