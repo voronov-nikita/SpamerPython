@@ -1,13 +1,9 @@
-from PyQt5 import QtCore
-import pyautogui
-import time
-import keyboard
-import sys
 
-from PyQt5.QtWidgets import QMainWindow, QLineEdit, QApplication, QPushButton, QLabel, QDialog, QWidget
+from PyQt5.QtWidgets import QMainWindow, QLineEdit, QApplication, QPushButton, QLabel, QDialog, QDesktopWidget
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QRect
 
+import sys
 
 # version = "1.0.1"
 
@@ -23,11 +19,10 @@ class SuccessfulCompletion(QDialog):
         self.InitText()
 
     def InitInterface(self):
-        x, y = pyautogui.size()
+        self._center()
+        
         self.setWindowIcon(QIcon(self.window_icon))
         self.setWindowTitle("Внимание")
-        self.setGeometry(QRect((x-self.window_size[0])//2, (y-self.window_size[1])//2, *self.window_size))
-        self.setFixedSize(self.width(), self.height())
 
     
     def InitText(self):
@@ -44,6 +39,16 @@ class SuccessfulCompletion(QDialog):
             font-weight: bold;
             text-align: center;
         """)
+        
+    def _center(self):
+        '''
+        Центрование окна по размеру экрана
+        '''
+        # Получаем размеры экрана
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
 
 
 class MesageEmptyPlace(QDialog):
@@ -53,10 +58,9 @@ class MesageEmptyPlace(QDialog):
         self.width_window = 350
         self.height_window = 150
 
-        x, y = pyautogui.size()
         self.setWindowIcon(QIcon("logo.png"))
         self.setWindowTitle("Внимание")
-        self.setGeometry(QRect((x-self.width_window)//2, (y-self.height_window)//2, self.width_window, self.height_window))
+        self._center()
         self.setFixedSize(self.width(), self.height())
 
         self.initText()
@@ -75,6 +79,16 @@ class MesageEmptyPlace(QDialog):
         font-weight: bold;
         text-align: center;
         """)
+        
+    def _center(self):
+        '''
+        Центрование окна по размеру экрана
+        '''
+        # Получаем размеры экрана
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
 
 
 class Window(QMainWindow):
@@ -88,11 +102,9 @@ class Window(QMainWindow):
         self.step = self.height_window//5
 
         self.setWindowTitle(f"SPAM")
-        x, y = pyautogui.size()
-        self.setGeometry(QRect((x-self.width_window)//2, (y-self.height_window)//2, self.width_window, self.height_window))
         self.setFixedSize(self.width(), self.height())
         self.setWindowIcon(QIcon("logo.png"))
-
+        self._center()
         self.initUI()
 
     def initUI(self):
@@ -153,17 +165,7 @@ class Window(QMainWindow):
 
     def start_send_message(self):
         try:
-            message = self.line_message.text().encode('utf-8')
-            amount = int(self.line_count.text())
-            time.sleep(int(self.line_timer.text()))
-
-            while amount > 0:
-                if keyboard.is_pressed("esc"):
-                    break
-                else:
-                    amount -= 1
-                    pyautogui.typewrite(message.decode('utf-8').strip())
-                    pyautogui.press("enter")
+            
             self.line_count.clear()
             self.line_message.clear()
             self.line_timer.clear()
@@ -177,6 +179,16 @@ class Window(QMainWindow):
             self.line_timer.clear()
             ex = MesageEmptyPlace()
             ex.exec_()
+            
+    def _center(self):
+        '''
+        Центрование окна по размеру экрана
+        '''
+        # Получаем размеры экрана
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
     
 
 
