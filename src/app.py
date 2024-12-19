@@ -1,6 +1,6 @@
 # 
-# 
-# 
+# Файл основного тела приложения
+# Сюда импортируются модули логики и компоненты для запуска самого приложения
 # 
 # 
 
@@ -10,6 +10,7 @@ from PyQt5.QtGui import QIcon
 from components.emptyPlace import MessageEmptyPlace
 from components.successfulCompletion import SuccessfulCompletion
 
+import config
 import sys
 
 class Window(QMainWindow):
@@ -22,9 +23,9 @@ class Window(QMainWindow):
         # this is step for inputs-lines
         self.step = self.height_window//5
 
-        self.setWindowTitle(f"SPAM")
+        self.setWindowTitle(config.titleApp)
         self.setFixedSize(self.width(), self.height())
-        self.setWindowIcon(QIcon("logo.png"))
+        self.setWindowIcon(QIcon(config.logo))
         self._center()
         self.initUI()
 
